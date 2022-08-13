@@ -27,8 +27,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import colors from './assets/colors/colors';
-import Icon from 'react-native-vector-icons/Ionicons';
-
+// import FontAwesome from 'react-native-vector-icons/FontAwesome';
+ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 const Section = ({children, title}): Node => {
@@ -75,8 +75,7 @@ const App: () => Node = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          {/* <MaterialCommunityIcons name="home" color={color} size={size} /> */}
-          <Icon name="rocket" size={30} color="#4F8EF7" />
+            <Ionicons name="ios-person" size={60} color="#4F8EF7" />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.js</Text> to change this
             screen and then come back to see your edits.
