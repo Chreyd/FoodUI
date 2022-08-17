@@ -1,42 +1,54 @@
-import { View, Text, StyleSheet, SafeAreaView, Image, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Image,
+  FlatList,
+} from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import categoriesData from '../assets/data/categoriesData';
 import popularData from '../assets/data/popularData';
-import colors from '../assets/colors/colors'
-
+import colors from '../assets/colors/colors';
 
 // Feather.loadFont();
 
 const Home = () => {
-
-  const renderCategoryItem = ({item}) =>{
-    return(
-      <View style={[styles.categoryItemWrapper, 
-        {
-          backgroundColor: item.selected ? colors.primary: colors.white, 
-          marginLeft: item.id==1? 20 : 0
-        }]}>
-        <Image source={item.image} style={styles.categoryItemImage}/>
-        <Text style={styles.categoryItemTitle} >{item.title}</Text>
-        <View style={[styles.categorySelectWrapper, 
+  const renderCategoryItem = ({item}) => {
+    return (
+      <View
+        style={[
+          styles.categoryItemWrapper,
           {
-            backgroundColor: item.selected? colors.white : colors.secondary,
-          }]}>
-          <Feather 
-            name='chevron-right' 
-            size={8} 
-            style={[styles.categorySelectItem,
+            backgroundColor: item.selected ? colors.primary : colors.white,
+            marginLeft: item.id == 1 ? 20 : 0,
+          },
+        ]}>
+        <Image source={item.image} style={styles.categoryItemImage} />
+        <Text style={styles.categoryItemTitle}>{item.title}</Text>
+        <View
+          style={[
+            styles.categorySelectWrapper,
             {
-              color: item.selected? colors.black : colors.white
-            }]}
+              backgroundColor: item.selected ? colors.white : colors.secondary,
+            },
+          ]}>
+          <Feather
+            name="chevron-right"
+            size={8}
+            style={[
+              styles.categorySelectItem,
+              {
+                color: item.selected ? colors.black : colors.white,
+              },
+            ]}
           />
         </View>
       </View>
-    )
-  }
-
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -44,7 +56,10 @@ const Home = () => {
 
       <SafeAreaView>
         <View style={styles.headerWrapper}>
-          <Image source={require('../assets/images/profile.png')} style={styles.profileImage} />
+          <Image
+            source={require('../assets/images/profile.png')}
+            style={styles.profileImage}
+          />
           <Feather name="menu" size={24} color={colors.textDark} />
         </View>
       </SafeAreaView>
@@ -57,7 +72,7 @@ const Home = () => {
 
       {/* Search */}
       <View style={styles.searcWrapper}>
-        <Feather name='search' size={16} color={colors.textDark}/>
+        <Feather name="search" size={16} color={colors.textDark} />
         <View style={styles.search}>
           <Text style={styles.searchText}>Search</Text>
         </View>
@@ -68,9 +83,9 @@ const Home = () => {
         <Text style={styles.categoriesTitle}>Categories</Text>
         <View style={styles.categoriesListWrapper}>
           <FlatList
-            data= {categoriesData}
-            renderItem= {renderCategoryItem}
-            keyExtractor= {(item) => item.id}
+            data={categoriesData}
+            renderItem={renderCategoryItem}
+            keyExtractor={item => item.id}
             horizontal={true}
           />
         </View>
@@ -79,18 +94,44 @@ const Home = () => {
       {/* Popular */}
       <View style={styles.poplularWrapper}>
         <Text style={styles.popularTitle}>Popular</Text>
-        {popularData.map(({item})=> (
-          <View>
-            <Text>Hello</Text>
+        {popularData.map(item => (
+          <View
+            style={[
+              styles.popularCardWrapper,
+              {
+                marginTop: item.id == 1 ? 10 : 20,
+              },
+            ]}>
+            <View>
+              <View>
+                <View style={styles.popularTopWrapper}>
+                  <MaterialCommunityIcons
+                    name="crown"
+                    size={12}
+                    color={colors.primary}
+                  />
+                  <Text style={styles.popularTopText}>Top oh the Week</Text>
+                </View>
+                <View style={styles.popularTitlesWrapper}>
+                  <Text style={styles.popularTitlestitle}>{item.title}</Text>
+                  <Text style={styles.popularTitlesWeight}>
+                    Weight: {item.weight}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                
+              </View>
+            </View>
           </View>
         ))}
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
   },
   headerWrapper: {
@@ -98,24 +139,24 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingTop: 20,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   profileImage: {
     width: 40,
     height: 40,
     borderRadius: 40,
   },
-  titlesWrapper:{
+  titlesWrapper: {
     marginTop: 30,
     paddingHorizontal: 20,
   },
-  titlesSubtitle:{
+  titlesSubtitle: {
     fontFamily: 'Montserrat-Regular',
     fontSize: 16,
     color: colors.textDark,
   },
   titlesTitle: {
-    fontFamily: 'Montserrat-bold',
+    fontFamily: 'Montserrat-Bold',
     fontSize: 32,
     color: colors.textDark,
     marginTop: 5,
@@ -124,8 +165,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
-    marginTop: 30
-
+    marginTop: 30,
   },
   search: {
     flex: 1,
@@ -143,7 +183,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   categoriesTitle: {
-    fontFamily: 'Montserrat-bold',
+    fontFamily: 'Montserrat-Bold',
     fontSize: 16,
     paddingHorizontal: 20,
     fontWeight: '900',
@@ -155,7 +195,7 @@ const styles = StyleSheet.create({
   categoryItemWrapper: {
     backgroundColor: colors.primary,
     marginRight: 20,
-    borderRadius: 20
+    borderRadius: 20,
   },
   categoryItemImage: {
     width: 60,
@@ -166,7 +206,7 @@ const styles = StyleSheet.create({
   },
   categoryItemTitle: {
     textAlign: 'center',
-    fontFamily: 'Montserrat-bold',
+    fontFamily: 'Montserrat-Bold',
     fontWeight: '700',
     fontSize: 14,
     marginTop: 10,
@@ -178,12 +218,48 @@ const styles = StyleSheet.create({
     width: 26,
     height: 26,
     borderRadius: 26,
-    marginBottom: 20
+    marginBottom: 20,
   },
   categorySelectItem: {
     alignSelf: 'center',
   },
-
-})
+  poplularWrapper: {
+    paddingHorizontal: 20,
+  },
+  popularTitle: {
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 16,
+  },
+  popularCardWrapper: {
+    backgroundColor: colors.white,
+    borderRadius: 25,
+    paddingTop: 20,
+    paddingLeft: 20,
+    flexDirection: 'row',
+  },
+  popularTopWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  popularTopText: {
+    marginLeft: 10,
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 14,
+  },
+  popularTitlesWrapper: {
+    marginTop: 20,
+  },
+  popularTitlestitle: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 14,
+    color: colors.textDark
+  },
+  popularTitlesWeight: {
+    fontFamily: 'Montserrat-Medium',
+    fontSize: 12,
+    color: colors.textLight,
+    marginTop: 5,
+  },
+});
 
 export default Home;
