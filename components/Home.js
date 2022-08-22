@@ -62,7 +62,7 @@ const Home = ({navigation}) => {
         <SafeAreaView>
           <View style={styles.headerWrapper}>
             <Image
-              source={require('../assets/images/profile.png')}
+              source={require('../assets/images/profile.jpeg')}
               style={styles.profileImage}
             />
             <Feather name="menu" size={24} color={colors.textDark} />
