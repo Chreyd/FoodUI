@@ -6,6 +6,7 @@ import {
   Image,
   FlatList,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -16,7 +17,7 @@ import colors from '../assets/colors/colors';
 
 // Feather.loadFont();
 
-const Home = () => {
+const Home = ({navigation}) => {
   const renderCategoryItem = ({item}) => {
     return (
       <View
@@ -53,7 +54,9 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" showsVerticalScrollIndicator={false} >
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        showsVerticalScrollIndicator={false}>
         {/* Header */}
 
         <SafeAreaView>
@@ -97,50 +100,59 @@ const Home = () => {
         <View style={styles.poplularWrapper}>
           <Text style={styles.popularTitle}>Popular</Text>
           {popularData.map(item => (
-            <View
+            <TouchableOpacity
               key={item.title}
-              style={[
-                styles.popularCardWrapper,
-                {
-                  marginTop: item.id == 1 ? 10 : 20,
-                },
-              ]}>
-              <View>
+              onPress={() =>
+                navigation.navigate('Details', {
+                  item: item,
+                })
+              }>
+              <View
+                style={[
+                  styles.popularCardWrapper,
+                  {
+                    marginTop: item.id == 1 ? 10 : 20,
+                  },
+                ]}>
                 <View>
-                  <View style={styles.popularTopWrapper}>
-                    <MaterialCommunityIcons
-                      name="crown"
-                      size={12}
-                      color={colors.primary}
-                    />
-                    <Text style={styles.popularTopText}>Top oh the Week</Text>
+                  <View>
+                    <View style={styles.popularTopWrapper}>
+                      <MaterialCommunityIcons
+                        name="crown"
+                        size={12}
+                        color={colors.primary}
+                      />
+                      <Text style={styles.popularTopText}>Top oh the Week</Text>
+                    </View>
+                    <View style={styles.popularTitlesWrapper}>
+                      <Text style={styles.popularTitlestitle}>
+                        {item.title}
+                      </Text>
+                      <Text style={styles.popularTitlesWeight}>
+                        Weight: {item.weight}
+                      </Text>
+                    </View>
                   </View>
-                  <View style={styles.popularTitlesWrapper}>
-                    <Text style={styles.popularTitlestitle}>{item.title}</Text>
-                    <Text style={styles.popularTitlesWeight}>
-                      Weight: {item.weight}
-                    </Text>
+                  <View style={styles.popularCardBottom}>
+                    <View style={styles.addPizzaBottom}>
+                      <Feather name="plus" size={16} color={colors.textDark} />
+                    </View>
+                    <View style={styles.ratingWrapper}>
+                      <MaterialCommunityIcons
+                        name="star"
+                        size={16}
+                        color={colors.textDark}
+                      />
+                      <Text style={styles.rating}>{item.rating} </Text>
+                    </View>
                   </View>
                 </View>
-                <View style={styles.popularCardBottom}>
-                  <View style={styles.addPizzaBottom}>
-                    <Feather name="plus" size={16} color={colors.textDark} />
-                  </View>
-                  <View style={styles.ratingWrapper}>
-                    <MaterialCommunityIcons
-                      name="star"
-                      size={16}
-                      color={colors.textDark}
-                    />
-                    <Text style={styles.rating}>{item.rating} </Text>
-                  </View>
-                </View>
-              </View>
 
-              <View style={styles.popularCardRight}>
-                <Image source={item.image} style={styles.popularCardImage} />
+                <View style={styles.popularCardRight}>
+                  <Image source={item.image} style={styles.popularCardImage} />
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
@@ -217,7 +229,7 @@ const styles = StyleSheet.create({
     shadowColor: colors.black,
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.05,
     shadowRadius: 10,
@@ -266,7 +278,7 @@ const styles = StyleSheet.create({
     shadowColor: colors.black,
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.05,
     shadowRadius: 10,
